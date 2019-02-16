@@ -20,8 +20,8 @@ This project was created to enable the easy, setup-free use of ES6 and SASS whil
 The only development dependency of this project is [Node.js](https://nodejs.org). Once Node is installed:
 
 ```
-git clone https://github.com/mdziedzic/build-boilerplate-static-es6-sass.git
-cd build-boilerplate-static-es6-sass
+git clone git@github.com:jmilamwalters/poetry-visualizer.git
+cd poetry-visualizer
 npm install
 ```
 
