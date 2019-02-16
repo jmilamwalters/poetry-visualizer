@@ -2,78 +2,59 @@
 
 A HTML5 audio visualizer for microphone or line-in input.
 
-![](thumbnail.jpg)
-
+![](img/thumbnail.jpg)
 
 ## Requirements
 
-A browser with `canvas` and `getUserMedia` support. (Currently Chrome, Firefox, Edge, and Opera)
+A modern browser like Chrome, Firefox, or Edge is required, though Chrome will likely be fastest.
 
+The page can be run directly from disk. You can also put it on a web server, but it must be served over HTTPS due to browser security restrictions. So it's easiest just to download the repository and run `index.html`.
 
-## Including
+This project uses browser globals to attach everything to the window object. If you're using a Javascript module system such as requireJS or commonJS (nodejs), Mike Reinstein maintains a port, [available here](https://github.com/mreinstein/visualizer).
 
-If you're using es modules or commonjs (node) you can include visualizer:
+## Usage
 
-```javascript
-import visualizer from 'visualizer.js'  // modern es modules approach
+Once the page is up, allow it to access microphone/line-in input. Use 1-9 to select a visualization (or click/tap to go to the next one), and the += key to switch between variants of that visualization.
 
-// *OR*
+On OS X you can use [Soundflower](http://rogueamoeba.com/freebies/soundflower/) to redirect system audio, and on Windows you can use [VB Cable](http://vb-audio.pagesperso-orange.fr/Cable/).
 
-const visualizer = require('visualizer.js') // commonjs (node) approach
-```
+## History
 
-Alternatively if you want to use this as an HTML script tag:
+### 2017-02-15 - v8
 
-```html
-<script src="dist/visualizer.global.min.js"></script>
-```
+  * fixed the Image visualizer so it better reflects the current audio
+  * added MIT license to project
+  * repo cleanup
+  * fixed broken three.js reference, added the library to repo
+  * readme change, now that the page can be run directly from disk
 
-This will expose `visualizer` as a javascript global variable.
+### 2014-12-15 - v7
 
+  * added two 3D visualizations, sphere and mountain
 
-## Configuration
+### 2014-12-01 - v6
 
-Several parameters are supported when creating a visualizer instance. These are all optional.
+  * application restructuring and optimization
 
+### 2014-11-30 - v5
 
-```javascript
-const options = {
-  // string indicating which container element should hold the visualization.
-  // If specified it will stretch to fit this container's width and height.
-  // If omitted it will assume a full screen visualization and fit to the window.
-  // You may pass a query selector string here, or a DOM element.
-  parent: '#my-container-div',
+  * added spike and image visualizations
 
-  // specify the image that is used by the vizImage visualization
-  image: 'my-image.png',
+### 2014-11-29 - v4
 
-  // in some cases you may already have a media stream. You can pass it in to
-  // the visualizer. If omitted it will create a new media stream
-  stream: mediaStream
-}
+  * significantly reduced number of particles on clouds/starburst, now load it instead of generating it
+  * disabled that mode on Firefox
 
-const viz = visualizer(options)
-```
+### 2014-11-29 - v3
 
+  * heavily refactored code to be more modular, with less duplication
+  * added box visualization
+  * added variants functionality
 
-## Running the examples
+### 2014-11-27 - v2
 
-open any of the index files in the `examples/` directory.
+  * added clouds/starburst mode
 
-You'll be prompted to allow microphone access. Upon accepting, the visualizations will start playing.
+### 2014-11-21 - v1
 
-* Press number keys `1` - `7` to select a visualization.
-* Press `=` key to switch between variants of that visualization. Some visualizations don't have a variant.
-
-
-## generating your own visualizations
-
-The `visualizer` module is pluggable; you can write your own visualizations as long as they conform to the
-expected interface. Look at any of the modules written in `lib/viz*` to see how this is done.
-
-```javascript
-import myVizPlugin from './some-visualizer-i-wrote.js'
-const viz = visualizer()
-
-viz.addVisualization(myVizPlugin)
-```
+  * initial port from Processing
