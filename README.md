@@ -1,4 +1,4 @@
-# Wine App
+# Poetry Visualizer
 
 # Build Boilerplate: Static/ES6/SASS
 
