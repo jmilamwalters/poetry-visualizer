@@ -58,9 +58,10 @@ function setup() {
         cv3d = new THREE.WebGLRenderer({canvas: canvas3d})
 
         // set up visualizer list
+        visualizers.push(new VizFlyout(0))
         visualizers.push(new VizRadialArcs(0))
         visualizers.push(new VizRadialBars(0))
-        visualizers.push(new VizFlyout(0))
+        // visualizers.push(new VizFlyout(0))
         visualizers.push(new VizSunburst(0))
         visualizers.push(new VizBoxes(0))
         visualizers.push(new VizImage())
@@ -145,7 +146,6 @@ function setInputListeners() {
     } else if (ev.keyCode == 187 || ev.keyCode == 61) {
       vary()
     }
-    //console.log(ev.keyCode);
   }
   document.body.onclick = function() {
     currentViz = (currentViz + 1) % visualizers.length

@@ -12,6 +12,7 @@ function VizFlyout(variant) {
     this.distances.push(0)
   }
 }
+
 VizFlyout.prototype.vary = function(variant) {
   this.variant = variant
   this.bars = this.variants[variant][0]
@@ -23,8 +24,6 @@ VizFlyout.prototype.resize = function() {
 }
 
 VizFlyout.prototype.draw = function(spectrum) {
-  console.log('drawing')
-
   ctx.save()
   ctx.clearRect(0, 0, cv.width, cv.height)
   ctx.translate(cv.width / 2, cv.height / 2)
@@ -32,8 +31,8 @@ VizFlyout.prototype.draw = function(spectrum) {
   for (var i = 0; i < bandCount; i++) {
     ctx.rotate(rotateAmount)
     ctx.lineWidth = 1 + (spectrum[i] / 256) * 5
-    // var hue = ((360.0 / bandCount) * i) / 360.0
-    var hue = 0.75
+    var hue = ((360.0 / bandCount) * i) / 360.0
+    // var hue = 0.75
     // console.log('hue', hue)
     var brightness = constrain((spectrum[i] * 1.0) / 150, 0.3, 1)
     ctx.strokeStyle = HSVtoRGB(hue, 1, brightness)
@@ -53,14 +52,13 @@ VizFlyout.prototype.arc = function(distance, angle) {
   ctx.arc(0, 0, distance, 0, angle)
   ctx.stroke()
   ctx.closePath()
-  ctx.fillStyle = 'blue'
-  // ctx.fillRect(130, 190, 40, 60)
-  // ctx.font = '30px Arial'
-  ctx.font = '12px serif'
-
-  const text = `
-  let's go no mun you right
-  that sound round bongs a lonely carapient pride
-`
-  ctx.fillText(text, 50, 90)
+  ctx.fillStyle = ctx.strokeStyle
+  // ctx.fillRect(distance, distance, 12, 12)
+  const fontSize = 12 * ctx.lineWidth
+  ctx.font = `${fontSize}px Inconsolata`
+  // ctx.font = '12px serif'
+  const words = ['lets', 'go', 'no', 'mun', 'you', 'right']
+  const wordCount = _.sample([1, 2, 3])
+  const text = _.sampleSize(words, wordCount).join('')
+  ctx.fillText(text, distance, distance)
 }
