@@ -150,6 +150,15 @@ function setInputListeners() {
   document.body.onclick = function() {
     currentViz = (currentViz + 1) % visualizers.length
     recalculateSizes()
+
+    const displayTextFor = [3, 4]
+
+    const demoText = document.getElementById('demo')
+    if (_.includes(displayTextFor, currentViz)) {
+      demoText.style.display = 'block'
+    } else {
+      demoText.style.display = 'none'
+    }
   }
   window.onresize = function() {
     recalculateSizes()
